@@ -64,10 +64,3 @@ Each volume type comes with its own performance characteristics and price, so yo
 - **Burst capability:** Up to 80 MiB/s
 - **IOPS specifications:** Not applicable (throughput optimized)
 
-### Magnetic (standard)
-
-- **Size range:** 1 GB to 1 TB
-- **Burst capability:** Up to hundreds of IOPS
-- **Average performance:** 100 IOPS
-- **Minimum IOPS:** Not specified for this type
-
