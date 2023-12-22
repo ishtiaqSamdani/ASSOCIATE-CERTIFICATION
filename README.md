@@ -64,3 +64,99 @@ Each volume type comes with its own performance characteristics and price, so yo
 - **Burst capability:** Up to 80 MiB/s
 - **IOPS specifications:** Not applicable (throughput optimized)
 
+Certainly! Here are the steps to increase the size of an EBS volume in AWS, along with additional instructions for extending a Linux file system after resizing the volume, and attaching a new EBS volume to an instance:
+
+### Increase EBS Volume Size in AWS
+
+**Step 1: Take Snapshot of EBS Volume**
+Before making any changes, take a snapshot of your EBS volume to protect your data.
+
+**Step 2: Increase EBS Volume Size in AWS Console**
+1. Go to the AWS Console.
+2. Navigate to the EBS section.
+3. Select the volume you want to modify.
+4. Choose the option to modify the volume.
+5. Specify the new, larger size for your volume.
+
+**Step 3: Extend a Linux File System after Resizing a Volume**
+After increasing the size of the EBS volume, you need to extend the file system on the volume to use the additional space.
+
+1. Check the file system's disk space usage:
+    ```bash
+    df -h
+    ```
+
+2. Check whether the volume has a partition:
+    ```bash
+    lsblk
+    ```
+
+3. If the volume has a partition, extend it:
+    ```bash
+    growpart /dev/[volume]
+    ```
+
+4. Finally, extend the file system:
+    - For XFS file system:
+        ```bash
+        xfs_growfs /dev/[volume]
+        ```
+    - For Ext4 file system:
+        ```bash
+        resize2fs /dev/[volume]
+        ```
+
+### Attach New EBS Volume
+
+**Step 1: Create a New EBS Volume**
+1. In the AWS Console, navigate to the EBS section.
+2. Create a new volume with the desired size and type.
+
+**Step 2: Attach the Volume to an Instance**
+1. Once the volume is created, attach it to your instance through the AWS Console.
+
+**Step 3: Mount the File System**
+After attaching the volume, mount the file system on the volume to your instance.
+
+1. List the block devices:
+    ```bash
+    lsblk
+    ```
+
+2. Check the file system's disk space usage:
+    ```bash
+    df -h
+    ```
+
+3. Check the file system type of the new volume:
+    ```bash
+    file -s /dev/[new_volume]
+    ```
+
+4. If the file system is not created, create an ext4 file system on the volume:
+    ```bash
+    mkfs -t ext4 /dev/[new_volume]
+    ```
+
+5. Check the file system type again:
+    ```bash
+    file -s /dev/[new_volume]
+    ```
+
+6. Create a mount point for the new volume:
+    ```bash
+    mkdir /mnt/[mount_point]
+    ```
+
+7. Mount the volume to the new mount point:
+    ```bash
+    mount /dev/[new_volume] /mnt/[mount_point]
+    ```
+
+8. Check the file system's disk space usage again:
+    ```bash
+    df -h
+    ```
+
+Feel free to adjust the placeholders like `[volume]`, `[new_volume]`, and `[mount_point]` with the actual values based on your AWS configuration. Let me know if you have any further questions!
+
