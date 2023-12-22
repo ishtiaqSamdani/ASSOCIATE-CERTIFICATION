@@ -64,12 +64,10 @@ Each volume type comes with its own performance characteristics and price, so yo
 - **Burst capability:** Up to 80 MiB/s
 - **IOPS specifications:** Not applicable (throughput optimized)
 
-Certainly! Here are the steps to increase the size of an EBS volume in AWS, along with additional instructions for extending a Linux file system after resizing the volume, and attaching a new EBS volume to an instance:
 
 ### Increase EBS Volume Size in AWS
 
 **Step 1: Take Snapshot of EBS Volume**
-Before making any changes, take a snapshot of your EBS volume to protect your data.
 
 **Step 2: Increase EBS Volume Size in AWS Console**
 1. Go to the AWS Console.
