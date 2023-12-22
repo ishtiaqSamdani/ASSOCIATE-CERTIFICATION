@@ -155,6 +155,3 @@ After attaching the volume, mount the file system on the volume to your instance
     ```bash
     df -h
     ```
-
-Feel free to adjust the placeholders like `[volume]`, `[new_volume]`, and `[mount_point]` with the actual values based on your AWS configuration. Let me know if you have any further questions!
-
