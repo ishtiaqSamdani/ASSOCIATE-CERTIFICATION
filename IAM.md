@@ -25,8 +25,7 @@
   - **Resource-based Policies:** Control access to AWS resources.
 
 - **Policy Structure:** JSON documents outlining permissions for users, groups, or roles.
- 
-Certainly! Here's a simplified IAM policy with one statement and an explanation of each property:
+
 
 ```json
 {
@@ -67,6 +66,7 @@ Certainly! Here's a simplified IAM policy with one statement and an explanation 
 - **`NotPrincipal`:** Specifies the AWS entity that the statement is not about. Here, it denies access if the action is performed by the role "RestrictedRole."
 
 - **`Description`:** A brief description of the statement's purpose for documentation purposes.
+  
 **Trust Policies**
 
 - **Role Trust Policies:** Define which principal entities (accounts, users, roles, federated users) can assume the role.
