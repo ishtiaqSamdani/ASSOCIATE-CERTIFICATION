@@ -66,20 +66,10 @@
 - **`NotPrincipal`:** Specifies the AWS entity that the statement is not about. Here, it denies access if the action is performed by the role "RestrictedRole."
 
 - **`Description`:** A brief description of the statement's purpose for documentation purposes.
-  
-**Trust Policies**
-
-- **Role Trust Policies:** Define which principal entities (accounts, users, roles, federated users) can assume the role.
-
-- **IAM Role:** Acts as both an identity and a resource that supports resource-based policies.
-
-- **Role Requirements:** Both a trust policy and an identity-based policy must be attached to an IAM role.
 
 **Roles**
 
 - **Collection of Policies:** Roles are collections of policies for AWS services.
-
-- **IAM Service Role:** When used with EC2, it must be stored in an instance profile.
 
 **Protect IAM Accounts**
 
@@ -110,19 +100,3 @@
 - **MFA Enforcement:** Enforce Multi-Factor Authentication for both root and IAM users.
 
 - **Credential Security:** Never share IAM credentials and access keys.
-
-**Policy Simulator**
-
-- **Purpose:** An online tool to check API calls allowed for an IAM User, Group, or Role based on their permissions.
-
-**Permission Boundaries**
-
-- **Function:** Sets the maximum permissions an IAM entity can obtain.
-
-- **Application:** Can be applied to users and roles (not groups) to prevent privilege escalation.
-
-**Assume Role vs Resource-based Policy**
-
-- **Assume Role:** When assuming an IAM role, original permissions are relinquished in favor of the role's assigned permissions.
-
-- **Resource-based Policy:** In this case, the principal doesn't have to give up their original permissions.
