@@ -39,8 +39,7 @@ Certainly! Here's a simplified IAM policy with one statement and an explanation 
       "Action": "s3:GetObject",
       "Resource": "arn:aws:s3:::my-bucket/*",
       "Condition": {
-        "IpAddress": {"aws:SourceIp": "192.168.1.0/24"},
-        "DateGreaterThan": {"aws:CurrentTime": "2023-01-01T00:00:00Z"}
+        //conditions
       },
       "Principal": {"AWS": "arn:aws:iam::123456789012:user/ishtiaq"},
       "NotPrincipal": {"AWS": "arn:aws:iam::987654321098:role/RestrictedRole"},
