@@ -28,56 +28,48 @@
 
 - **Policy Structure:** JSON documents outlining permissions for users, groups, or roles.
  
+Certainly! Here's a simplified IAM policy with one statement and an explanation of each property:
 
 ```json
 {
   "Version": "2012-10-17",
+  "Id": "MyExamplePolicy",
   "Statement": [
     {
+      "Sid": "AllowS3Read",
       "Effect": "Allow",
-      "Action": [
-        "s3:GetObject",
-        "s3:PutObject"
-      ],
-      "Resource": "arn:aws:s3:::example-bucket/*",
+      "Action": "s3:GetObject",
+      "Resource": "arn:aws:s3:::my-bucket/*",
       "Condition": {
-        "IpAddress": {"aws:SourceIp": "203.0.113.0/24"},
-        "NotIpAddress": {"aws:SourceIp": "192.0.2.0/24"},
+        "IpAddress": {"aws:SourceIp": "192.168.1.0/24"},
         "DateGreaterThan": {"aws:CurrentTime": "2023-01-01T00:00:00Z"}
-      }
-    },
-    {
-      "Effect": "Deny",
-      "Action": "s3:*",
-      "Resource": "arn:aws:s3:::example-bucket/sensitive-data/*"
+      },
+      "Principal": {"AWS": "arn:aws:iam::123456789012:user/JohnDoe"},
+      "NotPrincipal": {"AWS": "arn:aws:iam::987654321098:role/RestrictedRole"},
+      "Description": "Allow JohnDoe to read objects from 'my-bucket'."
     }
-  ]
+  ],
+  "Description": "This is a simple example IAM policy."
 }
 ```
 
 **Explanation:**
 
-- **Version:** Indicates the language version of the policy. In this case, it's using version "2012-10-17," which is a common version for AWS policies.
+- **`Sid`:** Statement ID for uniqueness and manageability.
 
-- **Statement:** An array containing individual statements that define the permissions. In this example, there are two statements.
+- **`Effect`:** Specifies whether the permissions are allowed or denied. Here, it's set to "Allow."
 
-  - **Statement 1:**
-    - **Effect:** Specifies whether the permissions are allowed or denied. In this case, it's set to "Allow."
-    - **Action:** Lists the AWS actions (API calls) that are allowed. Here, the policy allows the "s3:GetObject" and "s3:PutObject" actions.
-    - **Resource:** Specifies the AWS resource to which the actions apply. In this case, it's an S3 bucket named "example-bucket" and allows actions on objects within that bucket ("/*").
-    - **Condition:** Defines conditions under which the permissions are granted. This statement allows access only if the request comes from the IP address range "203.0.113.0/24" but not from "192.0.2.0/24" and only if the request is made after January 1, 2023.
+- **`Action`:** Lists the AWS actions (API calls) that are allowed. In this case, it allows the "s3:GetObject" action.
 
-  - **Statement 2:**
-    - **Effect:** Specifies whether the permissions are allowed or denied. In this case, it's set to "Deny."
-    - **Action:** Lists the AWS actions (API calls) that are denied. This statement denies any S3 actions ("s3:*") on objects within the "sensitive-data" directory of the "example-bucket" S3 bucket.
-    - **Resource:** Specifies the AWS resource to which the actions apply.
+- **`Resource`:** Specifies the AWS resource to which the actions apply. Here, it allows actions on objects within the "my-bucket" S3 bucket ("/*").
 
-This policy, in summary, allows read and write access to objects in the "example-bucket" S3 bucket under certain conditions. However, it explicitly denies any actions on objects within the "sensitive-data" directory of the same bucket.
+- **`Condition`:** Defines conditions under which the permissions are granted. In this example, it allows access only if the request comes from the IP address range "192.168.1.0/24" and if the request is made after January 1, 2023.
 
-- **Least Privilege Principle:** Policies should follow the principle of least privilege.
+- **`Principal`:** Specifies the AWS entity (user, role, or service) that the statement is about. In this case, it allows access for the IAM user "JohnDoe."
 
-- **Policy Attachment:** Policies assigned to a user are called inline policies.
+- **`NotPrincipal`:** Specifies the AWS entity that the statement is not about. Here, it denies access if the action is performed by the role "RestrictedRole."
 
+- **`Description`:** A brief description of the statement's purpose for documentation purposes.
 **Trust Policies**
 
 - **Role Trust Policies:** Define which principal entities (accounts, users, roles, federated users) can assume the role.
