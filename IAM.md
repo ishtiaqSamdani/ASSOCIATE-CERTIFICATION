@@ -16,8 +16,6 @@
 
 - **IAM Group Limitation:** IAM Groups are not considered identities and cannot be identified as principals in IAM policies.
 
-- **Assumption of Roles:** Only users and services can assume a role, not groups.
-
 - **IAM User Credentials:** A new IAM user created using AWS CLI or AWS API has no AWS credentials initially.
 
 **Policies**
@@ -44,9 +42,9 @@ Certainly! Here's a simplified IAM policy with one statement and an explanation 
         "IpAddress": {"aws:SourceIp": "192.168.1.0/24"},
         "DateGreaterThan": {"aws:CurrentTime": "2023-01-01T00:00:00Z"}
       },
-      "Principal": {"AWS": "arn:aws:iam::123456789012:user/JohnDoe"},
+      "Principal": {"AWS": "arn:aws:iam::123456789012:user/ishtiaq"},
       "NotPrincipal": {"AWS": "arn:aws:iam::987654321098:role/RestrictedRole"},
-      "Description": "Allow JohnDoe to read objects from 'my-bucket'."
+      "Description": "Allow ishtiaq to read objects from 'my-bucket'."
     }
   ],
   "Description": "This is a simple example IAM policy."
@@ -65,7 +63,7 @@ Certainly! Here's a simplified IAM policy with one statement and an explanation 
 
 - **`Condition`:** Defines conditions under which the permissions are granted. In this example, it allows access only if the request comes from the IP address range "192.168.1.0/24" and if the request is made after January 1, 2023.
 
-- **`Principal`:** Specifies the AWS entity (user, role, or service) that the statement is about. In this case, it allows access for the IAM user "JohnDoe."
+- **`Principal`:** Specifies the AWS entity (user, role, or service) that the statement is about. In this case, it allows access for the IAM user "ishtiaq."
 
 - **`NotPrincipal`:** Specifies the AWS entity that the statement is not about. Here, it denies access if the action is performed by the role "RestrictedRole."
 
