@@ -69,3 +69,52 @@ Each volume type comes with its own performance characteristics and price, so yo
 - **Burst capability:** Up to hundreds of IOPS
 - **Average performance:** 100 IOPS
 - **Minimum IOPS:** Not specified for this type
+
+
+[10:11 am, 22/12/2023] Ishtiaq Ahmed: https://docs.google.com/document/d/1Lq7awc_FQoEHIn_yA6hmkYQxUEV1eL6Ofw1zjV8nRlM/edit
+[11:43 am, 22/12/2023] Satyanarayana: Increase EBS Volume Size in AWS
+===========================================================
+Step 1: Take Snapshot of EBS Volume (to be Safe).
+Step 2: Increase EBS Volume Size in AWS Console.
+Step 3: Extend a Linux file system after resizing a volume.
+
+
+Command to Extend the file system:
+
+df -hT
+
+Check whether the volume has a partition:
+sudo lsblk
+
+Extend the partition:
+sudo growpart /dev/xvda 1
+
+Extend the file system on /:
+[XFS file system]: sudo xfs_growfs -d /
+[Ext4 file system]: sudo resize2fs /dev/xvda1
+
+
+===========================================================
+
+
+
+
+Attach new EBS volume:
+=============================================================
+Step:1- create a new ebs
+Step:2- attach to instance
+Step:3- mount file system
+
+Mount file system commands
+
+sudo lsblk
+df -hT
+file -s /dev/xvdf
+mkfs -t ext4 /dev/xvdf
+file -s /dev/xvdf
+mkdir -p /app/frontend
+mount /dev/xvdf /app/frontend
+df -hT
+
+
+=============================================================
